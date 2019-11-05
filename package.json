@@ -4,13 +4,22 @@
   "dependencies": {
     "config": ">=3.1.0",
     "docker-loghose": "^1.6.5",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
     "optimist": ">=0.6.1",
     "through2": "^3.0.1"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node ./console.js --section index",
-    "fake": "node ./console.js --section fake"
+    "start::logger": "node ./console.js",
+    "start::api": "node ./index.js",
+
+    "build": "docker build -t docker-logs .",
+    "randomLogger": "docker run --rm -d chentex/random-logger",
+
+    "init": "npm run build && npm run randomLogger && npm run randomLogger",
+    "start": "docker run -it -v /var/run/docker.sock:/var/run/docker.sock -p 3000:3000 docker-logs"
   },
   "engines": {
     "node": ">=7.6.x"
