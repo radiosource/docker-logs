@@ -26,7 +26,12 @@ module.exports = {
     if (!containerId) throw Error(ID_REQUIRED_MSG);
     return await new Promise(
         (resolve, reject) => fs.readFile(`${LOG_DIR}/${containerId}.log`, ENCODING,
-            (err, data = '') => err ? reject(err) : resolve(data.split('\n').filter(Boolean))
+            (err, data = '') => {
+              if (err) return reject(err);
+              resolve(data.split('\n')
+                  .filter(Boolean)
+                  .reverse())
+            }
         ));
   },
 

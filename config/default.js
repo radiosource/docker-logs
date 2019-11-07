@@ -5,9 +5,11 @@ module.exports = {
     port: process.env.NODE_APP_INSTANCE || 3000
   },
   logger: {
+
+    //Filters for attaching containers
     attachFilters: {
       matchByName: /.*/,
-      matchByImage: /auto.*/,
+      matchByImage: /.*/,
       skipByName: /.*disableLog.*/,
       skipByImage: /.*disableLog.*/,
     },

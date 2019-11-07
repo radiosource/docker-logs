@@ -1,9 +1,4 @@
+//Better way is having 2 different containers - one for logger and one for server (also one container for storage)
 const {exec} = require('child_process');
 require('./app/server');
 exec('npm run start::logger', _ => null);
-
-/**@todo
- * 1) tests for generic storage
- * 2) tests for attachFilters
- * 3) date filter
- */
