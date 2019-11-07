@@ -8,7 +8,7 @@ module.exports = {
         h1 = 'List of all containers that have logs',
         result = await storage
             .getList()
-            .catch(console.error.bind(null, "getContainersList::")),
+            .catch(console.error.bind(null, "Error::getContainersList", "\n")),
         items = result || [];
 
     ctx.body = render('list', {items, h1});
@@ -22,7 +22,7 @@ module.exports = {
         h1 = `Container logs. Id: ${id}`,
         result = await storage
             .read(id)
-            .catch(console.error.bind(null, "getContainerById::")),
+            .catch(console.error.bind(null, "Error::getContainerById", "\n")),
         items = result || [];
 
     ctx.body = render('logs', {items, h1});

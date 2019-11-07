@@ -5,6 +5,7 @@ COPY index.js .
 COPY console.js .
 COPY app app
 COPY config config
+COPY public public
 ADD logs ./logs
 
 RUN npm install modclean -g
@@ -18,6 +19,7 @@ WORKDIR "/var/www"
 COPY --from=build app app
 COPY --from=build logs logs
 COPY --from=build config config
+COPY --from=build public public
 COPY --from=build node_modules node_modules
 COPY --from=build package.json package.json
 COPY index.js .
