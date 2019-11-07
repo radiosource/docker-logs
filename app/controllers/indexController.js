@@ -3,31 +3,37 @@ const {render} = require('ect')({root: __dirname + '/../../public/views', ext: '
 
 module.exports = {
 
-  getContainersList: async (ctx, next) => {
+  getContainersList: async (req, res, next) => {
     const
         h1 = 'List of all containers that have logs',
+        responseType = req.params[0],
         result = await storage
             .getList()
             .catch(console.error.bind(null, "Error::getContainersList", "\n")),
         items = result || [];
 
-    ctx.body = render('list', {items, h1});
-    ctx.status = 200;
-    await next();
+    res.status(200)
+        .send(
+            render('list', {items, h1})
+        );
+    next()
   },
 
-  getContainerById: async (ctx, next) => {
+  getContainerById: async (req, res, next) => {
     const
-        {id} = ctx.params,
+        {id} = req.params,
         h1 = `Container logs. Id: ${id}`,
         result = await storage
             .read(id)
             .catch(console.error.bind(null, "Error::getContainerById", "\n")),
         items = result || [];
 
-    ctx.body = render('logs', {items, h1});
-    ctx.status = 200;
-    await next();
+
+    res.status(200)
+        .send(
+            render('logs', {items, h1})
+        );
+    next()
   }
 
 };

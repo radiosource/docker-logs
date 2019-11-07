@@ -1,16 +1,13 @@
-const Router = require('koa-router');
-const router = new Router();
+const express = require('express');
+const router = express.Router();
 const indexController = require('../controllers/indexController');
 
+
 router
-    .get('/list', indexController.getContainersList)
-    .get('/container/:id', indexController.getContainerById)
-    .get('/ping', async (ctx, next) => {
-      ctx.body = 'pong';
-      ctx.status = 200;
-      await next();
-    })
+    .get(/\/(json|html)\/list/, indexController.getContainersList)
+    .get(/\/(json|html)\/container\/:id/, indexController.getContainerById)
+    .get('/ping', async (req, res) => res.status(200).send('pong'))
 ;
 
 
-module.exports = router.routes();
+module.exports = router;
