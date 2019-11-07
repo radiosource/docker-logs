@@ -3,7 +3,7 @@ const router = new Router();
 const indexController = require('../controllers/indexController');
 
 router
-    .get('/list', indexController.getContainerList)
+    .get('/list', indexController.getContainersList)
     .get('/container/:id', indexController.getContainerById)
     .get('/ping', async (ctx, next) => {
       ctx.body = 'pong';

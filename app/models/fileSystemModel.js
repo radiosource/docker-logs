@@ -11,7 +11,7 @@ const STREAM_OPTIONS = {
 
 module.exports = {
 
-  write(containerId, payload) {
+  async write(containerId, payload) {
     if (!containerId) throw Error(ID_REQUIRED_MSG);
     if (!payload) throw Error(PAYLOAD_REQUIRED_MSG);
     if (!streams.has(containerId)) {
@@ -19,19 +19,27 @@ module.exports = {
       streams.get(containerId).on("error", err => console.log(err));//we can handle error like we wants
     }
 
-    return new Promise(resolve => streams.get(containerId).write(`${payload}\n`, resolve));
+    return await new Promise(resolve => streams.get(containerId).write(`${payload}\n`, resolve));
   },
 
-  read(containerId) {
+  async read(containerId) {
     if (!containerId) throw Error(ID_REQUIRED_MSG);
-    return new Promise(
+    return await new Promise(
         (resolve, reject) => fs.readFile(`${LOG_DIR}/${containerId}.log`, ENCODING,
+            (err, data = '') => err ? reject(err) : resolve(data.split('\n').filter(Boolean))
+        ));
+  },
+
+  async remove(containerId) {
+    if (!containerId) throw Error(ID_REQUIRED_MSG);
+    return await new Promise(
+        (resolve, reject) => fs.unlink(`${LOG_DIR}/${containerId}.log`,
             (err, data) => err ? reject(err) : resolve(data)
         ));
   },
 
   async getList() {
-    return new Promise(
+    return await new Promise(
         (resolve, reject) => fs.readdir(LOG_DIR,
             (err, data) => err ? reject(err) : resolve(data)
         ))

@@ -1,8 +1,23 @@
 const {name, version} = require('../package.json');
 module.exports = {
   app: {name, version},
-  api: require(`./default/api`),
-  logger: require(`./default/logger`),
+  server: {
+    port: process.env.NODE_APP_INSTANCE || 3000
+  },
+  logger: {
+    attachFilters: {
+      matchByName: /.*/,
+      matchByImage: /auto.*/,
+      skipByName: /.*disableLog.*/,
+      skipByImage: /.*disableLog.*/,
+    },
+
+    logOptions: {
+      json: false, // parse the lines that are coming as JSON
+      docker: null, // here goes options for Dockerode
+      events: null, // an instance of docker-allcontainers
+    }
+  },
 
   //all types of storage must have the same interface.
   // it would be nice to use interfaces from Typescript here

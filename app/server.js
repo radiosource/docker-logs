@@ -12,6 +12,6 @@ app.use(routes);
 
 const server = http
     .createServer(app.callback())
-    .listen(config.api.port, _ => console.log('%s listening at port %d', config.app.name, config.api.port));
+    .listen(config.server.port, _ => console.log('%s listening at port %d', config.app.name, config.server.port));
 
 module.exports = server;

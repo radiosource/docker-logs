@@ -2,22 +2,27 @@
   "name": "docker-logs",
   "version": "1.0.0",
   "dependencies": {
+    "chai": "^4.2.0",
     "config": ">=3.1.0",
     "docker-loghose": "^1.6.5",
+    "dockerode": "^3.0.2",
+    "ect": "^0.5.9",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
+    "mocha": "^6.2.2",
     "optimist": ">=0.6.1",
     "through2": "^3.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jasmine-node": "*"
+  },
   "scripts": {
+    "test": "mocha",
     "start::logger": "node ./console.js",
-    "start::api": "node ./index.js",
-
+    "start::server": "node ./index.js",
     "build": "docker build -t docker-logs .",
     "randomLogger": "docker run --rm -d chentex/random-logger",
-
     "init": "npm run build && npm run randomLogger && npm run randomLogger",
     "start": "docker run -it -v /var/run/docker.sock:/var/run/docker.sock -p 3000:3000 docker-logs"
   },

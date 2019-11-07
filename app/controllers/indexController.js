@@ -1,7 +1,7 @@
 const {storage} = require('config');
 module.exports = {
 
-  getContainerList: async (ctx, next) => {
+  getContainersList: async (ctx, next) => {
     let result = await storage
         .getList()
         .catch(console.error);
