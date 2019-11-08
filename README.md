@@ -1,13 +1,13 @@
 # Docker containers logging system
 Includes **watcher** daemon for collection logs, and http **server** for getting information.<br/>
 
-##### Watcher -
+**Watcher -**
 collect all logs from running containers, which correspond by `attachFilters` in **config** file, and save it to the **storage** <br/>
 
-##### Storage -
+**Storage -**
  defined in the **config** file. It had `read`,`write`, `remove` and `getList` methods.
  
-##### Server -
+**Server -**
   server starts up on `http://127.0.0.1:3000`.<br/>
     Routing:
   * `/list` - getting list of all containers, that having logs in the storage
