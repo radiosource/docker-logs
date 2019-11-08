@@ -1,4 +1,4 @@
-const {logger: {attachFilters, logOptions}, storage} = require('config');
+const {watcher: {attachFilters, logOptions}, storage} = require('config');
 const loghose = require('docker-loghose');
 const through = require('through2');
 const lh = loghose(Object.assign({}, logOptions, attachFilters));

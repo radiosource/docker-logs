@@ -6,16 +6,12 @@ module.exports = {
   getContainersList: async (req, res, next) => {
     const
         h1 = 'List of all containers that have logs',
-        responseType = req.params[0],
-        result = await storage
+        list = await storage
             .getList()
             .catch(console.error.bind(null, "Error::getContainersList", "\n")),
-        items = result || [];
+        items = list || [];
 
-    res.status(200)
-        .send(
-            render('list', {items, h1})
-        );
+    res.status(200).send(render('list', {items, h1}));
     next()
   },
 
@@ -23,16 +19,12 @@ module.exports = {
     const
         {id} = req.params,
         h1 = `Container logs. Id: ${id}`,
-        result = await storage
+        logs = await storage
             .read(id)
             .catch(console.error.bind(null, "Error::getContainerById", "\n")),
-        items = result || [];
+        items = logs || [];
 
-
-    res.status(200)
-        .send(
-            render('logs', {items, h1})
-        );
+    res.status(200).send(render('logs', {items, h1}));
     next()
   }
 

@@ -4,10 +4,9 @@ const indexController = require('../controllers/indexController');
 
 
 router
-    .get(/\/(json|html)\/list/, indexController.getContainersList)
-    .get(/\/(json|html)\/container\/:id/, indexController.getContainerById)
+    .get('/list/', indexController.getContainersList)
+    .get('/container/', indexController.getContainerById)
     .get('/ping', async (req, res) => res.status(200).send('pong'))
 ;
-
 
 module.exports = router;

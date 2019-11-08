@@ -4,7 +4,7 @@ module.exports = {
   server: {
     port: process.env.NODE_APP_INSTANCE || 3000
   },
-  logger: {
+  watcher: {
 
     //Filters for attaching containers
     attachFilters: {

@@ -6,16 +6,16 @@ const {storage} = require("config");
 
   describe('Storage functions availability', function () {
     it(`storage.write is a function`, function () {
-      return expect(storage.write instanceof Function).to.be.equal(true);
+      return expect(storage.write).to.be.an('function');
     });
     it(`storage.read is a function`, function () {
-      return expect(storage.read instanceof Function).to.be.equal(true);
+      return expect(storage.read).to.be.an('function');
     });
     it(`storage.remove is a function`, function () {
-      return expect(storage.remove instanceof Function).to.be.equal(true);
+      return expect(storage.remove).to.be.an('function');
     });
     it(`storage.getList is a function`, function () {
-      return expect(storage.getList instanceof Function).to.be.equal(true);
+      return expect(storage.getList).to.be.an('function');
     });
   });
 
@@ -27,7 +27,7 @@ const {storage} = require("config");
     it(`storage.getList`, async function () {
       await storage.write('b', PAYLOAD).catch(console.error);
       const listOfLogsAfterWrite = await storage.getList().catch(console.error);
-      return expect(listOfLogsAfterWrite.length).to.be.equal(2);
+      return expect(listOfLogsAfterWrite).to.be.an('array');
     });
     it(`storage.read length`, async function () {
       const logs = await storage.read('a').catch(err => []);
@@ -43,8 +43,8 @@ const {storage} = require("config");
     });
     it(`storage.remove is works`, async function () {
       await storage.remove('b').catch(console.error);
-      const listOfLogsAfterWrite = await storage.getList().catch(console.error);
-      return expect(listOfLogsAfterWrite.length).to.be.equal(0);
+      const logs = await storage.read('b').catch(err => []);
+      return expect(logs.length).to.be.equal(0);
     });
   });
 

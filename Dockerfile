@@ -28,5 +28,5 @@ COPY console.js .
 
 EXPOSE 3000
 ENV NODE_APP_INSTANCE=3000
-CMD npm run start::logger
+CMD npm run start::watcher
 CMD npm run start::server
