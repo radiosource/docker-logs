@@ -2,7 +2,7 @@ const fs = require('fs');
 const streams = new Map();
 const LOG_DIR = `${__dirname}/../../logs`;
 const ID_REQUIRED_MSG = 'containerId is required';
-const PAYLOAD_REQUIRED_MSG = 'containerId is required';
+const PAYLOAD_REQUIRED_MSG = 'payload is required';
 const ENCODING = 'utf8';
 const STREAM_OPTIONS = {
   encoding: ENCODING,

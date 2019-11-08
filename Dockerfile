@@ -6,12 +6,13 @@ COPY console.js .
 COPY app app
 COPY config config
 COPY public public
+COPY test test
 ADD logs ./logs
 
 RUN npm install modclean -g
 RUN npm install
 RUN modclean -r
-
+RUN npm run test
 
 FROM node:alpine
 RUN mkdir /var/www
