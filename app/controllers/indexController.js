@@ -17,10 +17,12 @@ module.exports = {
 
   getContainerById: async (req, res, next) => {
     const
+        limit = req.query.limit,
+        offset = req.query.offset,
         {id} = req.params,
         h1 = `Container logs. Id: ${id}`,
         logs = await storage
-            .read(id)
+            .read(id, {limit, offset})
             .catch(console.error.bind(null, "Error::getContainerById", "\n")),
         items = logs || [];
 

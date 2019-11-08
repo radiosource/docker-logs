@@ -1,5 +1,7 @@
 const fs = require('fs');
 const streams = new Map();
+const DEFAULT_LIMIT = 100;
+const DEFAULT_OFFSET = 0;
 const LOG_DIR = `${__dirname}/../../logs`;
 const ID_REQUIRED_MSG = 'containerId is required';
 const PAYLOAD_REQUIRED_MSG = 'payload is required';
@@ -22,15 +24,19 @@ module.exports = {
     return await new Promise(resolve => streams.get(containerId).write(`${payload}\n`, resolve));
   },
 
-  async read(containerId) {
+  async read(containerId, {limit, offset} = {}) {
     if (!containerId) throw Error(ID_REQUIRED_MSG);
+    offset = offset || DEFAULT_OFFSET;
+    limit = limit || DEFAULT_LIMIT;
     return await new Promise(
         (resolve, reject) => fs.readFile(`${LOG_DIR}/${containerId}.log`, ENCODING,
             (err, data = '') => {
               if (err) return reject(err);
               resolve(data.split('\n')
                   .filter(Boolean)
-                  .reverse())
+                  .reverse()
+                  .slice(offset, limit + offset)
+              )
             }
         ));
   },
