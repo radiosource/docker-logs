@@ -17,8 +17,7 @@ module.exports = {
 
   getContainerById: async (req, res, next) => {
     const
-        limit = req.query.limit,
-        offset = req.query.offset,
+        {limit,offset} = req.query,
         {id} = req.params,
         h1 = `Container logs. Id: ${id}`,
         logs = await storage

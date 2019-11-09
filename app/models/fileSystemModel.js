@@ -26,8 +26,8 @@ module.exports = {
 
   async read(containerId, {limit, offset} = {}) {
     if (!containerId) throw Error(ID_REQUIRED_MSG);
-    offset = offset || DEFAULT_OFFSET;
-    limit = limit || DEFAULT_LIMIT;
+    offset = Number(offset) || DEFAULT_OFFSET;
+    limit = Number(limit) || DEFAULT_LIMIT;
     return await new Promise(
         (resolve, reject) => fs.readFile(`${LOG_DIR}/${containerId}.log`, ENCODING,
             (err, data = '') => {
