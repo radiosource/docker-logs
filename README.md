@@ -26,3 +26,6 @@ Then you just need to start it (from `sudoers` user also)
 [user@group docker-logs]$ sudo npm run start 
 ``` 
 Now, if you check `http://127.0.0.1:3000/list` in your browser, you will see list with minimum 2 containers ids.
+
+###Flow chart
+![alt text](https://raw.githubusercontent.com/radiosource/docker-logs/master/flow-chart.jpeg)
