@@ -8,4 +8,4 @@ const argv = require('optimist')
     .argv;
 
 
-(async () => await require('./app/logger')(argv.opt))();
+(async () => await require('./app/watcher')(argv.opt))();

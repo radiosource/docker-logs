@@ -17,11 +17,11 @@
   },
   "scripts": {
     "test": "mocha",
-    "start::logger": "node ./console.js",
+    "start::watcher": "node ./console.js",
     "start::server": "node ./index.js",
     "build": "docker build -t docker-logs .",
     "randomLogger": "docker run --rm -d chentex/random-logger",
-    "init": "npm run build && npm run randomLogger && npm run randomLogger",
+    "init": "npm install && npm run build && npm run randomLogger && npm run randomLogger",
     "start": "docker run -it -v /var/run/docker.sock:/var/run/docker.sock -p 3000:3000 docker-logs"
   },
   "engines": {
